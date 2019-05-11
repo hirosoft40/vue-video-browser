@@ -1,4 +1,6 @@
 # vue-video-browser
+Udemy Course - Vue JS Essentials with Vuex and Vue Router by Stephen Grider
+
 
 ## Project setup
 ```
