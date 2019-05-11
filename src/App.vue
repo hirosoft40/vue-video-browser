@@ -1,24 +1,28 @@
 <template>
-  <div>
+  <div class="container">
     <SearchBar @termChange="onTermChange"></SearchBar>
-    <VideoList></VideoList>
-    {{ videos.length}}
+    <div class='row'>
+      <VideoDetail :video="selectedVideo"/>
+      <VideoList @videoSelect="onVideoSelect" :videos="videos"></VideoList>
+    </div>
   </div>
 </template>
 <script>
 import axios from "axios";
 import SearchBar from "./components/SearchBar";
 import VideoList from "./components/VideoList";
+import VideoDetail from "./components/VideoDetail";
 import { API_KEY } from "./Google.js";
 
 export default {
   name: "App",
   components: {
     SearchBar,
-    VideoList
+    VideoList,
+    VideoDetail
   },
   data() {
-    return { videos: [] };
+    return { videos: [], selectedVideo: null };
   },
   methods: {
     onTermChange(searchTerm) {
@@ -34,6 +38,9 @@ export default {
         .then(response => {
           this.videos = response.data.items;
         });
+    },
+    onVideoSelect(video) {
+      this.selectedVideo = video;
     }
   }
 };
